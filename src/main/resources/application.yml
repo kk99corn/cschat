@@ -1,12 +1,3 @@
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/cschat
-    username: csuser
-    password: cspass
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-
-  kafka:
-    bootstrap-servers: localhost:9092
+  profiles:
+    active: local  # 기본 실행 시 local 사용

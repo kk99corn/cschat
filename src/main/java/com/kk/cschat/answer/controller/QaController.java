@@ -14,7 +14,7 @@ public class QaController {
     private final QaService qaService;
 
     @GetMapping("/cs")
-    public ResponseEntity<String> getAnswer(@RequestParam("q") String keyword) {
-        return ResponseEntity.ok(qaService.getAnswer(keyword));
+    public ResponseEntity<String> getAnswer(@RequestParam("q") String q) {
+        return ResponseEntity.ok(qaService.getAnswer(q));
     }
 }
