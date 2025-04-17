@@ -11,10 +11,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class QuestionMessage implements KafkaMessage{
+public class QuestionMessage implements KafkaMessage {
+
     private String userId;
     private String keyword;
     private String rawQuestion;
+    private String responseUrl;
 
     @Override
     public String getTopic() {

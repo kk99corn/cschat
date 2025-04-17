@@ -27,6 +27,7 @@ public class KafkaQuestionConsumer {
                                             .userId(null)
                                             .keyword(q.getKeyword())
                                             .answer(answer)
+                                            .responseUrl(q.getResponseUrl())
                                             .build();
         producer.sendAnswer(message);
     }

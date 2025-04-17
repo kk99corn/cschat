@@ -16,6 +16,7 @@ public class AnswerMessage implements KafkaMessage {
     private String userId;
     private String keyword;
     private String answer;
+    private String responseUrl;
 
     @Override
     public String getTopic() {
