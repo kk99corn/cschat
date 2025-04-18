@@ -4,6 +4,7 @@ import com.kk.cschat.kafka.dto.KafkaMessage;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
@@ -16,6 +17,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 
 @Configuration
 @RequiredArgsConstructor
+@Slf4j
 public class KafkaProducerConfig {
 
     private final KafkaProperties kafkaProperties;
@@ -27,6 +29,7 @@ public class KafkaProducerConfig {
 
     @Bean
     public ProducerFactory<String, KafkaMessage> producerFactory() {
+        log.info("kafkaProperties.getBootstrapServers() = {}", kafkaProperties.getBootstrapServers());
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
