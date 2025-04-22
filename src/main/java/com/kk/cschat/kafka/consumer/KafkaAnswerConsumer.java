@@ -20,8 +20,6 @@ public class KafkaAnswerConsumer {
 
     @KafkaListener(topics = "cs-answer", groupId = "cs-chat-group")
     public void handleAnswer(AnswerMessage q) {
-        log.info("[handleAnswer] 수신 - q: {}", q.toString());
-
         if (q.getResponseUrl() != null) {
             String reply = "*[" + q.getKeyword() + "]* → " + q.getAnswer();
             notifier.sendToSlack(q.getResponseUrl(), reply);

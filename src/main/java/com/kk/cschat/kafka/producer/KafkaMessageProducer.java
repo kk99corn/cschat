@@ -14,12 +14,10 @@ public class KafkaMessageProducer {
     private final KafkaTemplate<String, KafkaMessage> kafkaTemplate;
 
     public void sendQuestion(KafkaMessage message) {
-        log.info("[sendQuestion] Kafka: topic={}, payload={}", message.getTopic(), message);
         kafkaTemplate.send("cs-question", message);
     }
 
     public void sendAnswer(KafkaMessage message) {
-        log.info("[sendAnswer] Kafka: topic={}, payload={}", message.getTopic(), message);
         kafkaTemplate.send("cs-answer", message);
     }
 }

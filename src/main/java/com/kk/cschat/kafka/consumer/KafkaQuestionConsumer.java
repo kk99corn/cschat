@@ -20,7 +20,6 @@ public class KafkaQuestionConsumer {
 
     @KafkaListener(topics = "cs-question", groupId = "cs-chat-group")
     public void handleQuestion(QuestionMessage q) {
-        log.info("[handleQuestion] 수신 - q: {}", q.toString());
         String answer = qaService.getAnswer(q.getKeyword());
 
         KafkaMessage message = AnswerMessage.builder()
