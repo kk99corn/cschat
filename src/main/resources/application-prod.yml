@@ -23,3 +23,8 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+gemini:
+  api:
+    url: https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent
+    key: ${GEMINI_API_KEY}
