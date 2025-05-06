@@ -25,4 +25,15 @@ public class QaKafkaTestController {
         producer.sendQuestion(message);
         return ResponseEntity.ok("Kafka 메시지 전송 완료: " + q);
     }
+
+    @GetMapping("/ai/cs/kafka")
+    public ResponseEntity<String> sendToKafkaAi(@RequestParam("q") String q) {
+        KafkaMessage message = QuestionMessage.builder()
+                                              .userId("test")
+                                              .keyword(q)
+                                              .rawQuestion(null)
+                                              .build();
+        producer.sendAiQuestion(message);
+        return ResponseEntity.ok("Kafka 메시지 전송 완료: " + q);
+    }
 }

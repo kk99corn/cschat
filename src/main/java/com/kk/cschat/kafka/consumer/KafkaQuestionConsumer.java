@@ -1,5 +1,8 @@
 package com.kk.cschat.kafka.consumer;
 
+import com.kk.cschat.ai.dto.AiRequest;
+import com.kk.cschat.ai.dto.AiResponse;
+import com.kk.cschat.ai.service.AiAnswerService;
 import com.kk.cschat.answer.service.QaService;
 import com.kk.cschat.kafka.dto.AnswerMessage;
 import com.kk.cschat.kafka.dto.KafkaMessage;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Component;
 public class KafkaQuestionConsumer {
 
     private final QaService qaService;
+    private final AiAnswerService aiAnswerService;
     private final KafkaMessageProducer producer;
 
     @KafkaListener(topics = "cs-question", groupId = "cs-chat-group")
@@ -29,5 +33,19 @@ public class KafkaQuestionConsumer {
                                             .responseUrl(q.getResponseUrl())
                                             .build();
         producer.sendAnswer(message);
+    }
+
+    @KafkaListener(topics = "cs-ai-question", groupId = "cs-chat-group")
+    public void handleAiQuestion(QuestionMessage q) {
+        AiResponse response = aiAnswerService.sendQuestion(new AiRequest(q.getKeyword(), null));
+        String answer = response.answer();
+
+        KafkaMessage message = AnswerMessage.builder()
+                                            .userId(null)
+                                            .keyword(q.getKeyword())
+                                            .answer(answer)
+                                            .responseUrl(q.getResponseUrl())
+                                            .build();
+        producer.sendAiAnswer(message);
     }
 }

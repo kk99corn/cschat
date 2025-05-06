@@ -25,4 +25,12 @@ public class KafkaAnswerConsumer {
             notifier.sendToSlack(q.getResponseUrl(), reply);
         }
     }
+
+    @KafkaListener(topics = "cs-ai-answer", groupId = "cs-chat-group")
+    public void handleAiAnswer(AnswerMessage q) {
+        if (q.getResponseUrl() != null) {
+            String reply = "*[" + q.getKeyword() + "]* → " + q.getAnswer();
+            notifier.sendToSlack(q.getResponseUrl(), reply);
+        }
+    }
 }

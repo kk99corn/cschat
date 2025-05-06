@@ -20,4 +20,12 @@ public class KafkaMessageProducer {
     public void sendAnswer(KafkaMessage message) {
         kafkaTemplate.send("cs-answer", message);
     }
+
+    public void sendAiQuestion(KafkaMessage message) {
+        kafkaTemplate.send("cs-ai-question", message);
+    }
+
+    public void sendAiAnswer(KafkaMessage message) {
+        kafkaTemplate.send("cs-ai-answer", message);
+    }
 }
