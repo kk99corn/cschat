@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kk.cschat.job.mapper.MockOrderMapper">
+
+    <select id="selectByOrdersAll" resultType="com.kk.cschat.job.dto.MockOrderDto$MockOrderResult">
+        SELECT ord_no
+             , qty
+             , price
+             , pay_complete_ts
+             , state
+        FROM mock_order
+    </select>
+
+    <select id="selectByOrders" resultType="com.kk.cschat.job.dto.MockOrderDto$MockOrderResult">
+        SELECT ord_no
+             , qty
+             , price
+             , pay_complete_ts
+             , state
+        FROM mock_order
+        WHERE pay_complete_ts >= #{payCompleteTs}
+        ORDER BY pay_complete_ts, ord_no
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="selectZeroOffsetByOrders" resultType="com.kk.cschat.job.dto.MockOrderDto$MockOrderResult">
+        SELECT ord_no
+             , qty
+             , price
+             , pay_complete_ts
+             , state
+        FROM mock_order
+        WHERE (pay_complete_ts > #{payCompleteTs})
+           OR (pay_complete_ts = #{payCompleteTs} AND ord_no > #{ordNo})
+        ORDER BY pay_complete_ts, ord_no
+        LIMIT #{limit} OFFSET 0
+    </select>
+
+</mapper>

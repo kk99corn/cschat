@@ -62,6 +62,7 @@ public class GeminiService implements AiAnswerService {
             항상 짧고 명확하게, 사실에 기반해 답변하세요.
             특정 표나 텍스트 강조 효과를 넣지 마시고, 문장으로 대답하세요.
             키워드 중심으로 대답하고 출처가 불확실한 내용은 제공하지 마세요.
+            컴퓨터공학 관련된 물음이 아니면 답하지마세요.
             """;
 
         Map<String, Object> userContent;

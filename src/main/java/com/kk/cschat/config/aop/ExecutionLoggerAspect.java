@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ExecutionLoggerAspect {
 
-    @Around("execution(* com.kk.cschat..*(..))")
+    @Around("execution(* com.kk.cschat..*(..)) && !bean(mockOrderMapper)")
     public Object logExecutionInfo(ProceedingJoinPoint joinPoint) throws Throwable {
         String methodName = joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName();
         String args = Arrays.toString(joinPoint.getArgs());
